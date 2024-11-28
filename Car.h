@@ -21,13 +21,13 @@ public:
     void setRokProdukcji(double rokProdukcjiData);
     void setPrzebieg(int przebiegData);
     
-    // Getters
-    int getNaped();
-    std::string getColor();
-    std::string getModel();
-    std::string getMarka();
-    double getRokProdukcji();
-    int getPrzebieg();
+    // Getters 
+    int getNaped() const;
+    std::string getColor() const;
+    std::string getModel() const;
+    std::string getMarka() const;
+    double getRokProdukcji() const;
+    int getPrzebieg() const;
 };
 
 #endif

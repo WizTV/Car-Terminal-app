@@ -26,26 +26,26 @@ void Car::setPrzebieg(int przebiegData) {
 }
 
 // Getters
-int Car::getNaped() {
+int Car::getNaped() const {
     return naped;
 }
 
-std::string Car::getColor() {
+std::string Car::getColor() const {
     return color;
 }
 
-std::string Car::getModel() {
+std::string Car::getModel() const {
     return model;
 }
 
-std::string Car::getMarka() {
+std::string Car::getMarka() const {
     return marka;
 }
 
-double Car::getRokProdukcji() {
+double Car::getRokProdukcji() const {
     return rokProdukcji;
 }
 
-int Car::getPrzebieg() {
+int Car::getPrzebieg() const {
     return przebieg;
 }
