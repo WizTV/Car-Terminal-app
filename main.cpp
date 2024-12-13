@@ -59,16 +59,19 @@ int main() {
 	int currentIndex = 0;
    
    do{
+   		//system("cls");
         showMenu();
         choice = _getch();
 
         switch (choice) {
             case '1': {
+            	system("cls");
                 Car car = createCar();
                 garage.addCarToGarage(car);
                 break;
             }
             case '2': {
+            	system("cls");
                 int index;
                 std::cout << "Enter the index of the car to delete: ";
                 std::cin >> index;
@@ -76,6 +79,7 @@ int main() {
                 break;
             }
             case '3': {
+            	system("cls");
                 int index;
                 std::cout << "Enter the index of the car to update: ";
                 std::cin >> index;
@@ -85,14 +89,19 @@ int main() {
             }
             case '4': {
                 char nav;
+                do{
+                system("cls");	
                 garage.viewCars(currentIndex);
                 std::cout << "Navigate (n for next, p for previous, q to quit): ";
-                std::cin >> nav;
+                nav = _getch();
                 if (nav == 'n') currentIndex++;
                 else if (nav == 'p') currentIndex--;
+				}while(nav != 'q');
+				system("cls");
                 break;
             }
             case '5': {
+            	system("cls");
                 std::string filename;
                 std::cout << "Enter filename to save to: ";
                 std::cin >> filename;
@@ -100,6 +109,7 @@ int main() {
                 break;
             }
             case '6': {
+            	system("cls");
                 std::string filename;
                 std::cout << "Enter filename to load from: ";
                 std::cin >> filename;
@@ -107,6 +117,7 @@ int main() {
                 break;
             }
             case '7': {
+            	system("cls");
                 std::string filename;
                 std::cout << "Enter filename to create: ";
                 std::cin >> filename;
@@ -114,6 +125,7 @@ int main() {
                 break;
             }
             case '8': {
+            	system("cls");
                 std::string model;
                 std::cout << "Enter model to search for: ";
                 std::cin >> model;
@@ -121,6 +133,7 @@ int main() {
                 break;
             }
             case '9': {
+            	system("cls");
                 double minYear, maxYear;
                 std::cout << "Enter minimum year: ";
                 std::cin >> minYear;
@@ -130,6 +143,7 @@ int main() {
                 break;
             }
             case 'a': {
+            	system("cls");
                 char order;
                 std::cout << "Sort by year (a for ascending, d for descending): ";
                 std::cin >> order;
@@ -137,10 +151,12 @@ int main() {
                 break;
             }
             case 's': {
+            	system("cls");
                 std::cout << "DO WIDZENIA" << std::endl;
                 break;
             }
             default:
+            	system("cls");
                 std::cout << "Invalid choice. Please try again.\n";
         }
     }while(choice != 's');

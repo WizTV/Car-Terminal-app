@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <cctype>
+#include <string>
 
 void Garage::addCarToGarage(Car carData) {
     stan.push_back(carData);
