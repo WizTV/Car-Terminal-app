@@ -92,11 +92,16 @@ int main() {
                 do{
                 system("cls");	
                 garage.viewCars(currentIndex);
-                std::cout << "Navigate (n for next, p for previous, d for delete current, q to quit): ";
+                std::cout << "\n\n--------------------------Navigate-------------------------\nn - next | p - previous | d - delete | e - edit | q - quit: ";
                 nav = _getch();
                 if (nav == 'n') currentIndex++;
                 else if (nav == 'p') currentIndex--;
                 else if(nav == 'd') garage.deleteCarFromGarage(currentIndex);
+                else if(nav == 'e')
+                {
+                	Car updatedCar = createCar();
+           			garage.updateCar(currentIndex, updatedCar);
+				}
 				}while(nav != 'q');
 				system("cls");
                 break;
