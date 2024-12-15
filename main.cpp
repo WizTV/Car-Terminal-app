@@ -92,10 +92,11 @@ int main() {
                 do{
                 system("cls");	
                 garage.viewCars(currentIndex);
-                std::cout << "Navigate (n for next, p for previous, q to quit): ";
+                std::cout << "Navigate (n for next, p for previous, d for delete current, q to quit): ";
                 nav = _getch();
                 if (nav == 'n') currentIndex++;
                 else if (nav == 'p') currentIndex--;
+                else if(nav == 'd') garage.deleteCarFromGarage(currentIndex);
 				}while(nav != 'q');
 				system("cls");
                 break;
@@ -152,7 +153,7 @@ int main() {
             }
             case 's': {
             	system("cls");
-                std::cout << "DO WIDZENIA" << std::endl;
+                std::cout << "Goodbye Mister/Missus" << std::endl;
                 break;
             }
             default:

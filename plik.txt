@@ -1,6 +1,0 @@
-Audi RS4 szary 2 2022 145000
-Audi RS5 szary 2 2022 65000
-Chevrolet Camaro niebieski 2 2021 75000
-Dodge Challenger czarny 2 2020 100000
-Mercedes-AMG C63 czarny 3 2020 90000
-Ford Mustang czerwony 3 2019 85000
