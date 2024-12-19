@@ -66,11 +66,30 @@ Car createCar() {
     return car;
 }
 
+void bubbleSort(std::vector<int>& arr) {
+    int n = arr.size();
+    bool swapped;
+
+    for (int i = 0; i < n - 1; i++) {
+        swapped = false;
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] < arr[j + 1]) { 
+                std::swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+
+        if (!swapped)
+            break;
+    }
+}
+
 int main() {
     Garage garage, trash;
     char choice;
     int currentIndex = 0;
     int currentIndexTrash = 0;
+    std::vector<int> selectedIndexes;
 
     do {
         showMenu();
@@ -88,15 +107,33 @@ int main() {
                 do {
                     system("cls");
                     trash.viewCars(currentIndexTrash);
-                    std::cout << "\n\n                               Navigate                               \n|n - next | p - previous | r - restore | q - quit | c - clear|: ";
+                    std::cout << "\n\n                                   Navigate                             ";     
+					std::cout << "\n|n - next | p - previous | d - delete | e - edit | q - quit | c - clear|\n ";
+					std::cout << "               | ; - select | '-' - unselect | v - restore selected |        ";
                     nav = _getch();
                     if (nav == 'n') currentIndexTrash++;
                     else if (nav == 'p') currentIndexTrash--;
                     else if (nav == 'r') {
 						garage.addCarToGarage(trash.getCarByIndex(currentIndexTrash));
                     	trash.deleteCarFromGarage(currentIndexTrash);
+                    	currentIndexTrash--;
 					}
                     else if(nav == 'c') currentIndexTrash = 0;
+                    else if(nav == ';') {
+                    	selectedIndexes.push_back(currentIndex);
+                    	bubbleSort(selectedIndexes);
+					}
+					else if(nav == '-') {
+						selectedIndexes.erase(selectedIndexes.begin() + currentIndex);
+						bubbleSort(selectedIndexes);	
+					}
+					else if(nav == 'v') {
+						do{
+						garage.addCarToGarage(garage.getCarByIndex(currentIndex));
+						trash.deleteCarFromGarage(selectedIndexes.size());
+						selectedIndexes.pop_back();
+						}while(selectedIndexes.size() > 0);
+					}
                 } while (nav != 'q');
                 system("cls");
                 break;
@@ -119,20 +156,39 @@ int main() {
                 do {
                     system("cls");
                     garage.viewCars(currentIndex);
-                    std::cout << "\n\n                                   Navigate                                   \n|n - next | p - previous | d - delete | e - edit | q - quit | c - clear|: ";
+                    std::cout << "\n\n                                   Navigate                             ";     
+					std::cout << "\n|n - next | p - previous | d - delete | e - edit | q - quit | c - clear|\n ";
+					std::cout << "               | ; - select | '-' - unselect | v - delete selected |        ";
                     nav = _getch();
                     if (nav == 'n') currentIndex++;
                     else if (nav == 'p') currentIndex--;
                     else if (nav == 'd') {
                         trash.addCarToGarage(garage.getCarByIndex(currentIndex));
                     	garage.deleteCarFromGarage(currentIndex);
+                    	currentIndex--;
                     } else if (nav == 'e') {
                         std::cout << "Editing car...\n";
                         Car updatedCar = createCar();
                         garage.updateCar(currentIndex, updatedCar);
                     }
                     else if(nav == 'c') currentIndex = 0;
+                    else if(nav == ';') {
+                    	selectedIndexes.push_back(currentIndex);
+                    	bubbleSort(selectedIndexes);
+					}
+					else if(nav == '-') {
+						selectedIndexes.erase(selectedIndexes.begin() + currentIndex);
+						bubbleSort(selectedIndexes);	
+					}
+					else if(nav == 'v') {
+						do{
+						trash.addCarToGarage(garage.getCarByIndex(currentIndex));
+						garage.deleteCarFromGarage(selectedIndexes.size());
+						selectedIndexes.pop_back();
+						}while(selectedIndexes.size() > 0);
+					}
                 } while (nav != 'q');
+                selectedIndexes.clear();
                 system("cls");
                 break;
             }
