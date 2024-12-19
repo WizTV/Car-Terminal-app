@@ -9,10 +9,12 @@ private:
     std::vector<Car> stan; // Lista samochodów w garażu
 
 public:
+
     // Zarządzanie samochodami
     void addCarToGarage(Car carData);
     void deleteCarFromGarage(int index);
     void updateCar(int index, const Car &updatedCar);
+    Car getCarByIndex(int index);
 
     // Operacje na plikach
     void saveToFile(const std::string &filename);

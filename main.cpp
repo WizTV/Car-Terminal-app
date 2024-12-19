@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "Garage.h"
 #include <limits>
+#include <algorithm>
 
 void showMenu() {
     std::cout << "\n=== Garage Management Menu ===\n";
@@ -124,15 +125,25 @@ int main() {
                     	bubbleSort(selectedIndexes);
 					}
 					else if(nav == '-') {
-						selectedIndexes.erase(selectedIndexes.begin() + currentIndex);
-						bubbleSort(selectedIndexes);	
+						// Find the element (currentIndex) in the selectedIndexes vector
+					    auto it = std::find(selectedIndexes.begin(), selectedIndexes.end(), currentIndexTrash);
+					
+					    // If found, erase it
+					    if (it != selectedIndexes.end()) {
+					        selectedIndexes.erase(it);
+					    }
+						//selectedIndexes.erase(selectedIndexes.begin() + currentIndex);
+						bubbleSort(selectedIndexes);		
 					}
 					else if(nav == 'v') {
-						do{
-						garage.addCarToGarage(garage.getCarByIndex(currentIndex));
-						trash.deleteCarFromGarage(selectedIndexes.size());
-						selectedIndexes.pop_back();
-						}while(selectedIndexes.size() > 0);
+						std::sort(selectedIndexes.rbegin(), selectedIndexes.rend());
+
+					    // Iterate through selectedIndexes and delete each car from the garage
+					    for (int i = 0; i < selectedIndexes.size(); ++i) {
+					        int carToDeleteIndex = selectedIndexes[i];  // Get the car index to delete
+					        garage.addCarToGarage(garage.getCarByIndex(carToDeleteIndex));  // Add to trash
+					        trash.deleteCarFromGarage(carToDeleteIndex);  // Delete from garage
+					    }
 					}
                 } while (nav != 'q');
                 system("cls");
@@ -177,15 +188,25 @@ int main() {
                     	bubbleSort(selectedIndexes);
 					}
 					else if(nav == '-') {
-						selectedIndexes.erase(selectedIndexes.begin() + currentIndex);
+					    // Find the element (currentIndex) in the selectedIndexes vector
+					    auto it = std::find(selectedIndexes.begin(), selectedIndexes.end(), currentIndex);
+					
+					    // If found, erase it
+					    if (it != selectedIndexes.end()) {
+					        selectedIndexes.erase(it);
+					    }
+						//selectedIndexes.erase(selectedIndexes.begin() + currentIndex);
 						bubbleSort(selectedIndexes);	
 					}
 					else if(nav == 'v') {
-						do{
-						trash.addCarToGarage(garage.getCarByIndex(currentIndex));
-						garage.deleteCarFromGarage(selectedIndexes.size());
-						selectedIndexes.pop_back();
-						}while(selectedIndexes.size() > 0);
+						 std::sort(selectedIndexes.rbegin(), selectedIndexes.rend());
+
+					    // Iterate through selectedIndexes and delete each car from the garage
+					    for (int i = 0; i < selectedIndexes.size(); ++i) {
+					        int carToDeleteIndex = selectedIndexes[i];  // Get the car index to delete
+					        trash.addCarToGarage(garage.getCarByIndex(carToDeleteIndex));  // Add to trash
+					        garage.deleteCarFromGarage(carToDeleteIndex);  // Delete from garage
+					    }
 					}
                 } while (nav != 'q');
                 selectedIndexes.clear();
