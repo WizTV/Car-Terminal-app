@@ -67,24 +67,6 @@ Car createCar() {
     return car;
 }
 
-void bubbleSort(std::vector<int>& arr) {
-    int n = arr.size();
-    bool swapped;
-
-    for (int i = 0; i < n - 1; i++) {
-        swapped = false;
-        for (int j = 0; j < n - i - 1; j++) {
-            if (arr[j] < arr[j + 1]) { 
-                std::swap(arr[j], arr[j + 1]);
-                swapped = true;
-            }
-        }
-
-        if (!swapped)
-            break;
-    }
-}
-
 int main() {
     Garage garage, trash;
     char choice;
@@ -117,9 +99,11 @@ int main() {
 			            }
 			            std::cout << std::endl;
 			        }
-			        std::cout << "\n\nNavigate:\n";
+			        
+			        //garage.viewCars(currentIndexTrash); // Alternative version of viewing
+			        std::cout << "\n\n                         Navigate:\n";
 			        std::cout << "| n - next | p - previous | r - restore | q - quit | c - clear |\n";
-			        std::cout << "| ; - select | '-' - unselect | v - restore selected |\n";
+			        std::cout << "    | ; - select | '-' - unselect | v - restore selected |\n";
 			        nav = _getch();
 			
 			        if (nav == 'n') currentIndexTrash++;
@@ -132,7 +116,7 @@ int main() {
 			        else if (nav == ';') {
 			            if (std::find(selectedIndexes.begin(), selectedIndexes.end(), currentIndexTrash) == selectedIndexes.end()) {
 			                selectedIndexes.push_back(currentIndexTrash);
-			                bubbleSort(selectedIndexes);
+			                std::sort(selectedIndexes.rbegin(), selectedIndexes.rend());
 			            }
 			        } else if (nav == '-') {
 			            auto it = std::find(selectedIndexes.begin(), selectedIndexes.end(), currentIndexTrash);
@@ -179,9 +163,11 @@ int main() {
 			            }
 			            std::cout << std::endl;
 			        }
-			        std::cout << "\n\nNavigate:\n";
-			        std::cout << "| n - next | p - previous | d - delete | e - edit | q - quit | c - clear |\n";
-			        std::cout << "| ; - select | '-' - unselect | v - delete selected |\n";
+			        
+			        //garage.viewCars(currentIndex); // Alternative version of viewing
+			        std::cout << "\n\n                         Navigate:\n";
+			        std::cout << "| n - next | p - previous | d - delete | q - quit | c - clear |\n";
+			        std::cout << "     | ; - select | '-' - unselect | v - delete selected |\n";
 			        nav = _getch();
 			
 			        if (nav == 'n') currentIndex++;
@@ -197,7 +183,7 @@ int main() {
 			        else if (nav == ';') {
 			            if (std::find(selectedIndexes.begin(), selectedIndexes.end(), currentIndex) == selectedIndexes.end()) {
 			                selectedIndexes.push_back(currentIndex);
-			                bubbleSort(selectedIndexes);
+			                std::sort(selectedIndexes.rbegin(), selectedIndexes.rend());
 			            }
 			        } else if (nav == '-') {
 			            auto it = std::find(selectedIndexes.begin(), selectedIndexes.end(), currentIndex);
@@ -272,7 +258,7 @@ int main() {
                 char order;
                 std::cout << "Sort by year (a for ascending, d for descending): ";
                 do{
-                	std::cin >> order;
+                	order = _getch();
                 	if (order == 'a') {
                     	garage.sortByYear(true);
                     	break;

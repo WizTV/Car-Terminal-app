@@ -56,7 +56,7 @@ void Garage::saveToFile(const std::string &filename) {
 }
 
 void Garage::loadFromFile(const std::string &filename) {
-    std::ifstream file(filename);
+    std::ifstream file(filename + ".txt");
     if (file.is_open()) {
         stan.clear();
         std::string marka, model, color;
