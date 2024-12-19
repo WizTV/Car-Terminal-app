@@ -9,7 +9,9 @@ private:
     std::vector<Car> stan; // Lista samochodów w garażu
 
 public:
-
+	// Getters
+	int getCarCount() const;
+	
     // Zarządzanie samochodami
     void addCarToGarage(Car carData);
     void deleteCarFromGarage(int index);

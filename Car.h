@@ -2,6 +2,7 @@
 #define CAR_H
 
 #include <string>
+#include <sstream>
 
 class Car {
 private:
@@ -22,6 +23,7 @@ public:
     void setPrzebieg(int przebiegData);
     
     // Getters 
+    std::string getCarInfo() const;
     int getNaped() const;
     std::string getColor() const;
     std::string getModel() const;

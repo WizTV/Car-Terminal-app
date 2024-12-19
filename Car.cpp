@@ -26,6 +26,16 @@ void Car::setPrzebieg(int przebiegData) {
 }
 
 // Getters
+std::string Car::getCarInfo() const {
+    std::ostringstream info;
+    info << "Marka: " << marka
+         << ", Model: " << model
+         << ", Color: " << color
+         << ", Rok produkcji: " << rokProdukcji
+		 << ", Przebieg: " << przebieg;
+    return info.str();
+}
+
 int Car::getNaped() const {
     return naped;
 }
