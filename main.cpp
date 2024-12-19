@@ -181,9 +181,9 @@ int main() {
             case 'a': {
                 system("cls");
                 char order;
-                std::cout << "Sort by year (a for ascending, d for descending): ";
+                std::cout << "Sort by year (a for ascending, d for descending): \n";
                 do{
-                	std::cin >> order;
+                	order = _getch();
                 	if (order == 'a') {
                     	garage.sortByYear(true);
                     	break;
