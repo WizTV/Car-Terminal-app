@@ -7,7 +7,7 @@
 void showMenu() {
     std::cout << "\n=== Garage Management Menu ===\n";
     std::cout << "1. Add a new car\n";
-    std::cout << "2. Delete a car\n";
+    std::cout << "2. Manage trash\n";
     std::cout << "3. Update car details\n";
     std::cout << "4. View cars\n";
     std::cout << "5. Save garage to file\n";
@@ -41,7 +41,7 @@ Car createCar() {
 
     std::cout << "Enter car naped (1 for AWD, 2 for FWD, etc.): ";
     while (!(std::cin >> naped) || naped < 0) {
-        std::cout << "Invalid input. Please enter a positive integer value.\n";
+        std::cout << "Invalid input.\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
@@ -49,7 +49,7 @@ Car createCar() {
 
     std::cout << "Enter car year of production: ";
     while (!(std::cin >> rokProdukcji) || rokProdukcji < 0) {
-        std::cout << "Invalid input. Please enter a positive numeric value.\n";
+        std::cout << "Invalid input.\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
@@ -57,7 +57,7 @@ Car createCar() {
 
     std::cout << "Enter car mileage: ";
     while (!(std::cin >> przebieg) || przebieg < 0) {
-        std::cout << "Invalid input. Please enter a positive integer value.\n";
+        std::cout << "Invalid input.\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
@@ -67,9 +67,10 @@ Car createCar() {
 }
 
 int main() {
-    Garage garage;
+    Garage garage, trash;
     char choice;
     int currentIndex = 0;
+    int currentIndexTrash = 0;
 
     do {
         showMenu();
@@ -83,15 +84,21 @@ int main() {
                 break;
             }
             case '2': {
+                char nav;
+                do {
+                    system("cls");
+                    trash.viewCars(currentIndexTrash);
+                    std::cout << "\n\n                               Navigate                               \n|n - next | p - previous | r - restore | q - quit | c - clear|: ";
+                    nav = _getch();
+                    if (nav == 'n') currentIndexTrash++;
+                    else if (nav == 'p') currentIndexTrash--;
+                    else if (nav == 'r') {
+						garage.addCarToGarage(trash.getCarByIndex(currentIndexTrash));
+                    	trash.deleteCarFromGarage(currentIndexTrash);
+					}
+                    else if(nav == 'c') currentIndexTrash = 0;
+                } while (nav != 'q');
                 system("cls");
-                int index;
-                std::cout << "Enter the index of the car to delete: ";
-                while (!(std::cin >> index) || index <= 0) {
-                    std::cout << "Invalid input. Please enter a positive integer value.\n";
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                }
-                garage.deleteCarFromGarage(index - 1);
                 break;
             }
             case '3': {
@@ -99,7 +106,7 @@ int main() {
                 int index;
                 std::cout << "Enter the index of the car to update: ";
                 while (!(std::cin >> index) || index <= 0) {
-                    std::cout << "Invalid input. Please enter a positive integer value.\n";
+                    std::cout << "Invalid input.\n";
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 }
@@ -117,7 +124,8 @@ int main() {
                     if (nav == 'n') currentIndex++;
                     else if (nav == 'p') currentIndex--;
                     else if (nav == 'd') {
-                        garage.deleteCarFromGarage(currentIndex);
+                        trash.addCarToGarage(garage.getCarByIndex(currentIndex));
+                    	garage.deleteCarFromGarage(currentIndex);
                     } else if (nav == 'e') {
                         std::cout << "Editing car...\n";
                         Car updatedCar = createCar();
@@ -165,13 +173,13 @@ int main() {
                 double minYear, maxYear;
                 std::cout << "Enter minimum year: ";
                 while (!(std::cin >> minYear) || minYear < 0) {
-                    std::cout << "Invalid input. Please enter a positive numeric value.\n";
+                    std::cout << "Invalid input.\n";
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 }
                 std::cout << "Enter maximum year: ";
                 while (!(std::cin >> maxYear) || maxYear < 0) {
-                    std::cout << "Invalid input. Please enter a positive numeric value.\n";
+                    std::cout << "Invalid input.\n";
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 }
@@ -181,9 +189,9 @@ int main() {
             case 'a': {
                 system("cls");
                 char order;
-                std::cout << "Sort by year (a for ascending, d for descending): \n";
+                std::cout << "Sort by year (a for ascending, d for descending): ";
                 do{
-                	order = _getch();
+                	std::cin >> order;
                 	if (order == 'a') {
                     	garage.sortByYear(true);
                     	break;

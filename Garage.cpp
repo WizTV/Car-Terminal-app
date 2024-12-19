@@ -10,6 +10,14 @@ void Garage::addCarToGarage(Car carData) {
     std::cout << "Car added to garage.\n";
 }
 
+Car Garage::getCarByIndex(int index) {
+    if (index >= 0 && index < stan.size()) {
+        return stan[index];
+    } else {
+        throw std::out_of_range("Invalid index");
+    }
+}
+
 void Garage::deleteCarFromGarage(int index) {
     if (index >= 0 && index < stan.size()) {
         stan.erase(stan.begin() + index);
