@@ -10,6 +10,10 @@ void Garage::addCarToGarage(Car carData) {
     std::cout << "Car added to garage.\n";
 }
 
+void Garage::emptyGarage() {
+	stan.clear();
+}
+
 Car Garage::getCarByIndex(int index) {
     if (index >= 0 && index < stan.size()) {
         return stan[index];

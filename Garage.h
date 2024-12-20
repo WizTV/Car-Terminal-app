@@ -17,6 +17,7 @@ public:
     void deleteCarFromGarage(int index);
     void updateCar(int index, const Car &updatedCar);
     Car getCarByIndex(int index);
+    void emptyGarage();
 
     // File actions
     void saveToFile(const std::string &filename);
