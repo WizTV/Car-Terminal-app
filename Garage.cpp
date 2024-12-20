@@ -111,19 +111,25 @@ void Garage::viewCars(int &currentIndex) {
 }
 
 void Garage::searchByModel(const std::string &model) {
-    auto it = std::find_if(stan.begin(), stan.end(), [&model](const Car &car) {
-        return car.getModel() == model;
-    });
-
-    if (it != stan.end()) {
-        std::cout << "Found car with model " << model << ":\n";
-        std::cout << "Marka: " << it->getMarka() << "\n"
-                  << "Color: " << it->getColor() << "\n"
-                  << "Naped: " << it->getNaped() << "\n";
-    } else {
-        std::cout << "No car with model " << model << " found.\n";
-    }
-}
+	 bool found = false; 
+	 for (const auto &car : stan) { 
+	 	if (car.getModel() == model) { 
+		 	if (!found) { 
+			 	std::cout << "Cars with model " << model << ":\n";
+				found = true; 
+			} 
+			std::cout << "Marka: " << car.getMarka();
+			std::cout << "  Model: " << car.getModel();
+			std::cout << "  Color: " << car.getColor();
+			std::cout << "  Naped: " << car.getNaped() ;
+			std::cout << "  Rok produkcji: "<< car.getRokProdukcji() ;
+			std::cout << "  Przebieg: " << car.getPrzebieg() << "\n";
+		 } 
+	} 
+	if (!found) { 
+	std::cout << "No car with model " << model << " found.\n";
+	 }
+ }
 
 void Garage::searchByYearRange(double minYear, double maxYear) {
     for (const auto &car : stan) {

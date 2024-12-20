@@ -6,32 +6,32 @@
 
 class Garage {
 private:
-    std::vector<Car> stan; // Lista samochodów w garażu
+    std::vector<Car> stan;
 
 public:
 	// Getters
 	int getCarCount() const;
 	
-    // Zarządzanie samochodami
+    // Car management
     void addCarToGarage(Car carData);
     void deleteCarFromGarage(int index);
     void updateCar(int index, const Car &updatedCar);
     Car getCarByIndex(int index);
 
-    // Operacje na plikach
+    // File actions
     void saveToFile(const std::string &filename);
     void loadFromFile(const std::string &filename);
     void createNewFile(const std::string &filename);
 
-    // Wyświetlanie i wyszukiwanie
+    // Viewing and searching
     void viewCars(int &currentIndex);
     void searchByModel(const std::string &model);
     void searchByYearRange(double minYear, double maxYear);
 
-    // Sortowanie
+    // Sorting
     void sortByYear(bool ascending);
 
-    // Zakończenie programu
+    // Program shutdown
     void confirmExit(bool &exitProgram);
 };
 
