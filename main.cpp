@@ -99,21 +99,31 @@ int main() {
 			            }
 			            std::cout << std::endl;
 			        }
-			        
-			        //garage.viewCars(currentIndexTrash); // Alternative version of viewing
+			
+					//trash.viewCars(currentIndexTrash); // Alternative version of viewing
+					
 			        std::cout << "\n\n                         Navigate:\n";
 			        std::cout << "| n - next | p - previous | r - restore | q - quit | c - clear |\n";
 			        std::cout << "    | ; - select | '-' - unselect | v - restore selected |\n";
 			        nav = _getch();
-			
-			        if (nav == 'n') currentIndexTrash++;
-			        else if (nav == 'p') currentIndexTrash--;
-			        else if (nav == 'r') {
+
+			        if (nav == 'n') {
+			            if (currentIndexTrash < trash.getCarCount() - 1) {
+			                currentIndexTrash++;
+			            }
+			        } else if (nav == 'p') {
+			            if (currentIndexTrash > 0) {
+			                currentIndexTrash--;
+			            }
+			        } else if (nav == 'r') {
 			            garage.addCarToGarage(trash.getCarByIndex(currentIndexTrash));
 			            trash.deleteCarFromGarage(currentIndexTrash);
-			            currentIndexTrash--;
-			        } else if (nav == 'c') currentIndexTrash = 0;
-			        else if (nav == ';') {
+			            if (currentIndexTrash >= trash.getCarCount() && trash.getCarCount() > 0) {
+			                currentIndexTrash = trash.getCarCount() - 1;
+			            }
+			        } else if (nav == 'c') {
+			            currentIndexTrash = 0;
+			        } else if (nav == ';') {
 			            if (std::find(selectedIndexes.begin(), selectedIndexes.end(), currentIndexTrash) == selectedIndexes.end()) {
 			                selectedIndexes.push_back(currentIndexTrash);
 			                std::sort(selectedIndexes.rbegin(), selectedIndexes.rend());
@@ -165,22 +175,32 @@ int main() {
 			        }
 			        
 			        //garage.viewCars(currentIndex); // Alternative version of viewing
+			
 			        std::cout << "\n\n                         Navigate:\n";
 			        std::cout << "| n - next | p - previous | d - delete | q - quit | c - clear |\n";
 			        std::cout << "     | ; - select | '-' - unselect | v - delete selected |\n";
 			        nav = _getch();
 			
-			        if (nav == 'n') currentIndex++;
-			        else if (nav == 'p') currentIndex--;
-			        else if (nav == 'd') {
+			        if (nav == 'n') {
+			            if (currentIndex < garage.getCarCount() - 1) {
+			                currentIndex++;
+			            }
+			        } else if (nav == 'p') {
+			            if (currentIndex > 0) {
+			                currentIndex--;
+			            }
+			        } else if (nav == 'd') {
 			            trash.addCarToGarage(garage.getCarByIndex(currentIndex));
 			            garage.deleteCarFromGarage(currentIndex);
-			            currentIndex--;
+			            if (currentIndex >= garage.getCarCount() && garage.getCarCount() > 0) {
+			                currentIndex = garage.getCarCount() - 1;
+			            }
 			        } else if (nav == 'e') {
 			            Car updatedCar = createCar();
 			            garage.updateCar(currentIndex, updatedCar);
-			        } else if (nav == 'c') currentIndex = 0;
-			        else if (nav == ';') {
+			        } else if (nav == 'c') {
+			            currentIndex = 0;
+			        } else if (nav == ';') {
 			            if (std::find(selectedIndexes.begin(), selectedIndexes.end(), currentIndex) == selectedIndexes.end()) {
 			                selectedIndexes.push_back(currentIndex);
 			                std::sort(selectedIndexes.rbegin(), selectedIndexes.rend());
